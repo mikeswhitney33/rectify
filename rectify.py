@@ -141,8 +141,8 @@ def select_points(input_image):
     """
     allows the users to select 4 points from the image
     """
+    print("click and drag each corner to the desired location")
     image = resize_aspect(input_image, width=600)
-    print("Select the 4 points to rectify. press enter when done")
     points = [
         (SHORT_SIDE, SHORT_SIDE),
         (image.shape[1]-SHORT_SIDE, SHORT_SIDE),
@@ -185,6 +185,7 @@ def rectify(imname, output):
     homography, _ = cv.findHomography(np.array(points), np.array(h_points))
     result = cv.warpPerspective(og_image, homography, size)
     cv.namedWindow("result", cv.WINDOW_KEEPRATIO)
+    print("Press S to save and Q to quit")
     while True:
         cv.imshow("result", result)
         key = cv.waitKey(5)
